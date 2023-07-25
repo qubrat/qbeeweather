@@ -17,12 +17,14 @@ export default {
 			green: {
 				100: "#ecfdf5",
 				500: "#8AA8A6",
-				700: "#317570",
+				700: "#487e6f",
 				800: "#4B6966",
 				900: "#425c5a",
 			},
-			success: "#84ce95",
-			white: colors.white,
+			success: "#82c07b",
+			error:"#fb5d5e",
+			warning:"#dea966"
+,			white: colors.white,
 			black: colors.black,
 		},
 		extend: {
