@@ -518,6 +518,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^20.4.4":
+  version: 20.4.4
+  resolution: "@types/node@npm:20.4.4"
+  checksum: 43f3c4a8acc38ae753e15a0e79bae0447d255b3742fa87f8e065d7b9d20ecb0e03d6c5b46c00d5d26f4552160381a00255f49205595a8ee48c2423e00263c930
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -2665,6 +2672,7 @@ __metadata:
   dependencies:
     "@achamaro/tailwindcss-iconify-icon": ^0.1.2
     "@iconify/react": ^4.1.1
+    "@types/node": ^20.4.4
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
     "@typescript-eslint/eslint-plugin": ^6.0.0

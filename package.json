@@ -16,6 +16,7 @@
   "devDependencies": {
     "@achamaro/tailwindcss-iconify-icon": "^0.1.2",
     "@iconify/react": "^4.1.1",
+    "@types/node": "^20.4.4",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

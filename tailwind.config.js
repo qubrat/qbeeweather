@@ -21,10 +21,14 @@ export default {
 				800: "#4B6966",
 				900: "#425c5a",
 			},
-			success: "#82c07b",
-			error:"#fb5d5e",
-			warning:"#dea966"
-,			white: colors.white,
+			airquality: {
+				good: "#82c07b",
+				fair: "#a0b356",
+				moderate: "#bfa13b",
+				poor: "#dd8938",
+				verypoor: "#fb5d5e",
+			},
+			white: colors.white,
 			black: colors.black,
 		},
 		extend: {

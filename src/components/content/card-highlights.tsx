@@ -1,34 +1,50 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useContext, useEffect, useState } from "react";
+import { LocationContext } from "../../context/LocationContext";
+import { fetchAirQuality } from "../../api/fetchHighlights";
+import { IAirQuality } from "../../interfaces/highlights";
 
 const AirQuality = () => {
+	const { lat, lon } = useContext(LocationContext);
+	const [airQuality, setAirQuality] = useState<IAirQuality | undefined>();
+
+	useEffect(() => {
+		const getAirQuality = async () => {
+			const response = await fetchAirQuality(lat, lon);
+			setAirQuality(response);
+		};
+		getAirQuality();
+	}, [lat, lon]);
+
 	return (
-		<div className="bg-green-100 p-4 rounded-3xl col-span-2">
+		<div className="col-span-2 p-4 bg-green-100 rounded-3xl">
 			<span className="flex justify-between ">
-				<span className="text-green-700">Air Quality Index</span> <span className="bg-success rounded-full px-3">Good</span>
+				<span className="text-green-700">Air Quality Index</span>{" "}
+				<span className={`px-3 rounded-full ${airQuality?.color}`}>{airQuality?.text}</span>
 			</span>
-			<div className="flex gap-4 my-4 items-center justify-between">
-				<Icon icon="ph:wind-duotone" className="text-green-900 w-12 h-12" />
+			<div className="flex items-center justify-between gap-4 my-4">
+				<Icon icon="ph:wind-duotone" className="w-12 h-12 text-green-900" />
 				<div className="">
 					<p className="text-green-700">PM2.5</p>
-					<p className="text-green-900 font-medium text-3xl">3.90</p>
+					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.pm2_5 : "-"}</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">
 						SO<span className="text-sm">2</span>
 					</p>
-					<p className="text-green-900 font-medium text-3xl">7.75</p>
+					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.so2 : "-"}</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">
 						NO<span className="text-sm">2</span>
 					</p>
-					<p className="text-green-900 font-medium text-3xl">33.6</p>
+					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.no2 : "-"}</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">
 						O<span className="text-sm">3</span>
 					</p>
-					<p className="text-green-900 font-medium text-3xl">38.6</p>
+					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.o3 : "-"}</p>
 				</div>
 			</div>
 		</div>
@@ -37,18 +53,18 @@ const AirQuality = () => {
 
 const Sun = () => {
 	return (
-		<div className="bg-green-100 p-4 rounded-3xl col-span-2 text-left">
+		<div className="col-span-2 p-4 text-left bg-green-100 rounded-3xl">
 			<span className="text-green-700">Sunrise & Sunset</span>
 
-			<div className="flex gap-4 my-4 items-center justify-between">
-				<Icon icon="ph:sun-duotone" className="text-green-900 w-12 h-12" />
+			<div className="flex items-center justify-between gap-4 my-4">
+				<Icon icon="ph:sun-duotone" className="w-12 h-12 text-green-900" />
 				<div className="">
 					<p className="text-green-700">Sunrise</p>
-					<p className="text-green-900 font-medium text-3xl">6:46 AM</p>
+					<p className="text-3xl font-medium text-green-900">6:46 AM</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">Sunset</p>
-					<p className="text-green-900 font-medium text-3xl">5:39 PM</p>
+					<p className="text-3xl font-medium text-green-900">5:39 PM</p>
 				</div>
 			</div>
 		</div>
@@ -65,11 +81,11 @@ interface ISmallCardProps {
 
 const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 	return (
-		<div className="bg-green-100 p-4 rounded-3xl text-left">
+		<div className="p-4 text-left bg-green-100 rounded-3xl">
 			<span className="text-green-700">{title}</span>
-			<div className="flex gap-4 my-4 items-center justify-between">
-				<Icon icon={icon} className="text-green-900 w-12 h-12" />
-				<span className="text-green-900 font-medium text-3xl">
+			<div className="flex items-center justify-between gap-4 my-4">
+				<Icon icon={icon} className="w-12 h-12 text-green-900" />
+				<span className="text-3xl font-medium text-green-900">
 					{data}
 					<span className={`text-2xl ${top ? "align-top" : ""}`}>{unit}</span>
 				</span>
@@ -81,7 +97,7 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 export default function Highlights() {
 	return (
 		<div className="w-full p-6 bg-white rounded-3xl">
-			<p className="text-xl mb-4 text-left">Todays Highlights</p>
+			<p className="mb-4 text-2xl text-left">Todays Highlights</p>
 			<div className="grid grid-cols-4 grid-rows-2 gap-6">
 				<AirQuality />
 				<Sun />
