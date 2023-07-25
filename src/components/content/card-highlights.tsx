@@ -96,7 +96,7 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 
 export default function Highlights() {
 	return (
-		<div className="w-full p-6 bg-white rounded-3xl">
+		<div className="w-full p-8 bg-white rounded-3xl">
 			<p className="mb-4 text-2xl text-left">Todays Highlights</p>
 			<div className="grid grid-cols-4 grid-rows-2 gap-6">
 				<AirQuality />

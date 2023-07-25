@@ -18,7 +18,7 @@ export default function CardNow() {
 	}, [lat, lon]);
 
 	return (
-		<div className="flex flex-col items-start justify-center w-full p-6 text-white bg-green-900 rounded-3xl">
+		<div className="flex flex-col items-start justify-center w-full p-8 text-white bg-green-900 rounded-3xl">
 			<p className="text-2xl ">Now</p>
 			<div className="flex flex-row items-center justify-between w-full my-4">
 				<span className="text-8xl ">
@@ -33,7 +33,7 @@ export default function CardNow() {
 			</div>
 			<div className="align-bottom">
 				<Icon icon="ph:map-pin-duotone" className="inline w-6 h-6" />{" "}
-				<span className="inline text-green-500">
+				<span className="inline text-green-500 align-bottom ">
 					{name}, {country}
 				</span>
 			</div>
