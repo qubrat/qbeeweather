@@ -1,6 +1,7 @@
 export interface IAirQuality {
 	color: string;
-	text: string;
+	level: string;
+	message?: string;
 	co: number;
 	no: number;
 	no2: number;

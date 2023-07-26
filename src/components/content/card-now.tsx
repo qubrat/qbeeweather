@@ -4,15 +4,18 @@ import { useContext, useEffect, useState } from "react";
 import { LocationContext } from "../../context/LocationContext";
 import { getCityNameFromLocation } from "../../api/locationService";
 import { WeatherContext } from "../../context/WeatherContext";
+import Spinner from "./spinner";
 
 export default function CardNow() {
 	const { lat, lon, name, country, updateCity } = useContext(LocationContext);
 	const { temp, desc, icon } = useContext(WeatherContext);
 	const [weatherIcon, setWeatherIcon] = useState<string>(weather);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const date = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
 
 	useEffect(() => {
+		setLoading(true);
 		const getCity = async () => {
 			const response = await getCityNameFromLocation(lat, lon);
 			updateCity(response.name, response.country);
@@ -26,6 +29,8 @@ export default function CardNow() {
 			icon && getWeatherIcon(icon);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoading(false);
 		}
 	}, [lat, lon, icon]);
 
@@ -37,7 +42,7 @@ export default function CardNow() {
 					{temp ? temp : "-"}
 					<span className="align-top text-7xl">°c</span>
 				</span>
-				<img src={weatherIcon} alt="current-weather" className="h-20 ml-4" />
+				{loading ? <Spinner size="large" /> : <img src={weatherIcon} alt="weather icon" className="w-24 h-24" />}
 			</div>
 			<p>{desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "No data"}</p>
 			<hr className="w-full my-4 border border-green-500" />

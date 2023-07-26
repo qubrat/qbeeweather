@@ -4,8 +4,14 @@ import { LocationContext } from "../../context/LocationContext";
 import { fetchAirQuality } from "../../api/fetchHighlights";
 import { IAirQuality } from "../../interfaces/highlights";
 import { WeatherContext } from "../../context/WeatherContext";
+import Spinner from "./spinner";
+import Tooltip from "./tooltip";
 
-const AirQuality = () => {
+interface IAirQualityProps {
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AirQuality = ({ setLoading }: IAirQualityProps) => {
 	const { lat, lon } = useContext(LocationContext);
 	const [airQuality, setAirQuality] = useState<IAirQuality | undefined>();
 
@@ -14,14 +20,23 @@ const AirQuality = () => {
 			const response = await fetchAirQuality(lat, lon);
 			setAirQuality(response);
 		};
-		getAirQuality();
+		setLoading(true);
+		try {
+			getAirQuality();
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
 	}, [lat, lon]);
 
 	return (
 		<div className="col-span-2 p-4 bg-green-100 rounded-3xl">
 			<span className="flex justify-between ">
 				<span className="text-green-700">Air Quality Index</span>{" "}
-				<span className={`px-3 rounded-full ${airQuality?.color}`}>{airQuality?.text}</span>
+				<Tooltip message={airQuality?.message}>
+					<span className={`px-3 rounded-full cursor-help ${airQuality?.color}`}>{airQuality?.level}</span>
+				</Tooltip>
 			</span>
 			<div className="flex items-center justify-between gap-4 my-4">
 				<Icon icon="ph:wind-duotone" className="w-12 h-12 text-green-900" />
@@ -63,11 +78,11 @@ const Sun = () => {
 				<Icon icon="ph:sun-duotone" className="w-12 h-12 text-green-900" />
 				<div className="">
 					<p className="text-green-700">Sunrise</p>
-					<p className="text-3xl font-medium text-green-900">{sunrise ? sunrise : ""}</p>
+					<p className="text-3xl font-medium text-green-900">{sunrise ? sunrise : "-"}</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">Sunset</p>
-					<p className="text-3xl font-medium text-green-900">{sunset ? sunset : ""}</p>
+					<p className="text-3xl font-medium text-green-900">{sunset ? sunset : "-"}</p>
 				</div>
 			</div>
 		</div>
@@ -99,12 +114,16 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 
 export default function Highlights() {
 	const { humidity, pressure, visibility, feelsLike } = useContext(WeatherContext);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	return (
 		<div className="w-full p-8 bg-white rounded-3xl">
-			<p className="mb-4 text-2xl text-left">Todays Highlights</p>
+			<div className="flex justify-between">
+				<p className="mb-4 mr-4 text-2xl text-left">Todays Highlights</p>
+				{loading && <Spinner size="standard" color="green-700" />}
+			</div>
 			<div className="grid grid-cols-4 grid-rows-2 gap-6">
-				<AirQuality />
+				<AirQuality setLoading={setLoading} />
 				<Sun />
 				<SmallCard title="Humidity" icon="ph-drop-duotone" data={humidity} unit="%" />
 				<SmallCard title="Pressure" icon="ph-waves-duotone" data={pressure} unit="hPa" />
