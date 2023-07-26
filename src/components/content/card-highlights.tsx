@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { LocationContext } from "../../context/LocationContext";
 import { fetchAirQuality } from "../../api/fetchHighlights";
 import { IAirQuality } from "../../interfaces/highlights";
+import { WeatherContext } from "../../context/WeatherContext";
 
 const AirQuality = () => {
 	const { lat, lon } = useContext(LocationContext);
@@ -52,6 +53,8 @@ const AirQuality = () => {
 };
 
 const Sun = () => {
+	const { sunrise, sunset } = useContext(WeatherContext);
+
 	return (
 		<div className="col-span-2 p-4 text-left bg-green-100 rounded-3xl">
 			<span className="text-green-700">Sunrise & Sunset</span>
@@ -60,11 +63,11 @@ const Sun = () => {
 				<Icon icon="ph:sun-duotone" className="w-12 h-12 text-green-900" />
 				<div className="">
 					<p className="text-green-700">Sunrise</p>
-					<p className="text-3xl font-medium text-green-900">6:46 AM</p>
+					<p className="text-3xl font-medium text-green-900">{sunrise}</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">Sunset</p>
-					<p className="text-3xl font-medium text-green-900">5:39 PM</p>
+					<p className="text-3xl font-medium text-green-900">{sunset}</p>
 				</div>
 			</div>
 		</div>
@@ -74,7 +77,7 @@ const Sun = () => {
 interface ISmallCardProps {
 	title: string;
 	icon: string;
-	data: number;
+	data: number | string;
 	unit: string;
 	top?: boolean;
 }
@@ -95,16 +98,18 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 };
 
 export default function Highlights() {
+	const { humidity, pressure, visibility, feelsLike } = useContext(WeatherContext);
+
 	return (
 		<div className="w-full p-8 bg-white rounded-3xl">
 			<p className="mb-4 text-2xl text-left">Todays Highlights</p>
 			<div className="grid grid-cols-4 grid-rows-2 gap-6">
 				<AirQuality />
 				<Sun />
-				<SmallCard title="Humidity" icon="ph-drop-duotone" data={82} unit="%" />
-				<SmallCard title="Pressure" icon="ph-waves-duotone" data={1024} unit="hPa" />
-				<SmallCard title="Visibility" icon="ph-eye-duotone" data={10} unit="km" />
-				<SmallCard title="Feels Like" icon="ph-thermometer-hot-duotone" data={8} unit="°c" top />
+				<SmallCard title="Humidity" icon="ph-drop-duotone" data={humidity} unit="%" />
+				<SmallCard title="Pressure" icon="ph-waves-duotone" data={pressure} unit="hPa" />
+				<SmallCard title="Visibility" icon="ph-eye-duotone" data={(visibility / 1000).toFixed(2)} unit="km" />
+				<SmallCard title="Feels Like" icon="ph-thermometer-hot-duotone" data={Math.round(feelsLike)} unit="°c" top />
 			</div>
 		</div>
 	);

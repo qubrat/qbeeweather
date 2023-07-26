@@ -1,6 +1,6 @@
 const SETTINGS = {
 	API_URL: "https://api.openweathermap.org",
-	API_KEY: "cd04da841b08e8ea217daa6f03a91508",
+	API_KEY: "c8ba3af6c7c83687382d47b02599d18d",
 };
 
 export default SETTINGS;
