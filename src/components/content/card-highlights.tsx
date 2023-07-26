@@ -63,11 +63,11 @@ const Sun = () => {
 				<Icon icon="ph:sun-duotone" className="w-12 h-12 text-green-900" />
 				<div className="">
 					<p className="text-green-700">Sunrise</p>
-					<p className="text-3xl font-medium text-green-900">{sunrise}</p>
+					<p className="text-3xl font-medium text-green-900">{sunrise ? sunrise : ""}</p>
 				</div>
 				<div className="">
 					<p className="text-green-700">Sunset</p>
-					<p className="text-3xl font-medium text-green-900">{sunset}</p>
+					<p className="text-3xl font-medium text-green-900">{sunset ? sunset : ""}</p>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 			<div className="flex items-center justify-between gap-4 my-4">
 				<Icon icon={icon} className="w-12 h-12 text-green-900" />
 				<span className="text-3xl font-medium text-green-900">
-					{data}
+					{data ? data : "-"}
 					<span className={`text-2xl ${top ? "align-top" : ""}`}>{unit}</span>
 				</span>
 			</div>

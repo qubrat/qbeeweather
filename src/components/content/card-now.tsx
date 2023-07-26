@@ -34,7 +34,7 @@ export default function CardNow() {
 			<p className="text-2xl ">Now</p>
 			<div className="flex flex-row items-center justify-between w-full my-4">
 				<span className="text-8xl ">
-					{temp}
+					{temp ? temp : "-"}
 					<span className="align-top text-7xl">°c</span>
 				</span>
 				<img src={weatherIcon} alt="current-weather" className="h-20 ml-4" />
