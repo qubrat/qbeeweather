@@ -18,15 +18,15 @@ export default function CardNow() {
 			updateCity(response.name, response.country);
 		};
 		const getWeatherIcon = async (icon: string) => {
-			try {
-				const response = await import(`../../assets/weather_icons/${icon}.png`);
-				setWeatherIcon(response.default);
-			} catch (error) {
-				console.log(error);
-			}
+			const response = await import(`../../assets/weather_icons/${icon}.png`);
+			setWeatherIcon(response.default);
 		};
-		getCity();
-		icon && getWeatherIcon(icon);
+		try {
+			getCity();
+			icon && getWeatherIcon(icon);
+		} catch (error) {
+			console.log(error);
+		}
 	}, [lat, lon, icon]);
 
 	return (
@@ -39,7 +39,7 @@ export default function CardNow() {
 				</span>
 				<img src={weatherIcon} alt="current-weather" className="h-20 ml-4" />
 			</div>
-			<p>{desc.charAt(0).toUpperCase() + desc.slice(1)}</p>
+			<p>{desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "No data"}</p>
 			<hr className="w-full my-4 border border-green-500" />
 			<div className="align-bottom">
 				<Icon icon="ph:calendar-blank-duotone" className="inline w-6 h-6" /> <span className="inline text-green-500">{date}</span>
