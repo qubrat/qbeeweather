@@ -6,6 +6,7 @@ import { IAirQuality } from "../../interfaces/highlights";
 import { WeatherContext } from "../../context/WeatherContext";
 import Spinner from "./spinner";
 import Tooltip from "./tooltip";
+import { useIsTablet } from "../../hooks/useIsMobile";
 
 interface IAirQualityProps {
 	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,36 +32,38 @@ const AirQuality = ({ setLoading }: IAirQualityProps) => {
 	}, [lat, lon]);
 
 	return (
-		<div className="col-span-2 p-4 bg-green-100 rounded-3xl">
+		<div className="p-4 bg-green-100 md:col-span-2 rounded-3xl">
 			<span className="flex justify-between ">
 				<span className="text-green-700">Air Quality Index</span>{" "}
 				<Tooltip message={airQuality?.message}>
 					<span className={`px-3 rounded-full cursor-help ${airQuality?.color}`}>{airQuality?.level}</span>
 				</Tooltip>
 			</span>
-			<div className="flex items-center justify-between gap-4 my-4">
-				<Icon icon="ph:wind-duotone" className="w-12 h-12 text-green-900" />
-				<div className="">
-					<p className="text-green-700">PM2.5</p>
-					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.pm2_5 : "-"}</p>
-				</div>
-				<div className="">
-					<p className="text-green-700">
-						SO<span className="text-sm">2</span>
-					</p>
-					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.so2 : "-"}</p>
-				</div>
-				<div className="">
-					<p className="text-green-700">
-						NO<span className="text-sm">2</span>
-					</p>
-					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.no2 : "-"}</p>
-				</div>
-				<div className="">
-					<p className="text-green-700">
-						O<span className="text-sm">3</span>
-					</p>
-					<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.o3 : "-"}</p>
+			<div className="flex items-center mt-2">
+				<Icon icon="ph:wind-duotone" className="inline w-12 h-12 mr-4 text-green-900" />
+				<div className="grid flex-auto grid-cols-2 gap-2 xl:grid-cols-4">
+					<div>
+						<p className="text-green-700">PM2.5</p>
+						<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.pm2_5 : "-"}</p>
+					</div>
+					<div>
+						<p className="text-green-700">
+							SO<span className="text-sm">2</span>
+						</p>
+						<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.so2 : "-"}</p>
+					</div>
+					<div>
+						<p className="text-green-700">
+							NO<span className="text-sm">2</span>
+						</p>
+						<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.no2 : "-"}</p>
+					</div>
+					<div>
+						<p className="text-green-700">
+							O<span className="text-sm">3</span>
+						</p>
+						<p className="text-3xl font-medium text-green-900">{airQuality ? airQuality.o3 : "-"}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -70,17 +73,21 @@ const AirQuality = ({ setLoading }: IAirQualityProps) => {
 const Sun = () => {
 	const { sunrise, sunset } = useContext(WeatherContext);
 
+	const isTablet = useIsTablet();
+
 	return (
-		<div className="col-span-2 p-4 text-left bg-green-100 rounded-3xl">
+		<div className="p-4 text-left bg-green-100 md:col-span-2 rounded-3xl">
 			<span className="text-green-700">Sunrise & Sunset</span>
 
-			<div className="flex items-center justify-between gap-4 my-4">
-				<Icon icon="ph:sun-duotone" className="w-12 h-12 text-green-900" />
-				<div className="">
+			<div className="flex items-center justify-around gap-4 mt-4 xl:justify-between">
+				{!isTablet && <Icon icon="ph:sun-duotone" className="w-12 h-12 text-green-900" />}
+				<div className="flex flex-col items-center justify-center">
+					{isTablet && <Icon icon="ph:sun-horizon-duotone" className="w-10 h-10 text-green-900" />}
 					<p className="text-green-700">Sunrise</p>
 					<p className="text-3xl font-medium text-green-900">{sunrise ? sunrise : "-"}</p>
 				</div>
-				<div className="">
+				<div className="flex flex-col items-center justify-center">
+					{isTablet && <Icon icon="ph:moon-stars-duotone" className="w-10 h-10 text-green-900" />}
 					<p className="text-green-700">Sunset</p>
 					<p className="text-3xl font-medium text-green-900">{sunset ? sunset : "-"}</p>
 				</div>
@@ -101,8 +108,8 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 	return (
 		<div className="p-4 text-left bg-green-100 rounded-3xl">
 			<span className="text-green-700">{title}</span>
-			<div className="flex items-center justify-between gap-4 my-4">
-				<Icon icon={icon} className="w-12 h-12 text-green-900" />
+			<div className="flex items-center justify-between gap-4 my-2">
+				<Icon icon={icon} className="w-10 h-10 text-green-900 md:w-12 md:h-12" />
 				<span className="text-3xl font-medium text-green-900">
 					{data ? data : "-"}
 					<span className={`text-2xl ${top ? "align-top" : ""}`}>{unit}</span>
@@ -117,12 +124,12 @@ export default function Highlights() {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	return (
-		<div className="w-full p-8 bg-white rounded-3xl">
+		<div className="p-8 bg-white rounded-3xl">
 			<div className="flex justify-between">
 				<p className="mb-4 mr-4 text-2xl text-left">Todays Highlights</p>
 				{loading && <Spinner size="standard" color="green-700" />}
 			</div>
-			<div className="grid grid-cols-4 grid-rows-2 gap-6">
+			<div className="grid gap-6 xl:grid-cols-4">
 				<AirQuality setLoading={setLoading} />
 				<Sun />
 				<SmallCard title="Humidity" icon="ph-drop-duotone" data={humidity} unit="%" />

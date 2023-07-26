@@ -39,7 +39,12 @@ const WeatherContext = createContext<WeatherContextValue>({
 	updateWeather: () => {},
 });
 
-const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface WeatherProviderProps {
+	children: React.ReactNode;
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const WeatherProvider = ({ children, setLoading }: WeatherProviderProps) => {
 	const [weather, setWeather] = useState<WeatherContextData>({
 		temp: 0,
 		desc: "",
@@ -61,9 +66,15 @@ const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ children }) 
 	useEffect(() => {
 		const getWeather = async () => {
 			const response = await getCurrentWeather(lat, lon);
-			response && updateWeather(response.weather!, response.highlights!, response.sun!);
+			updateWeather(response.weather!, response.highlights!, response.sun!);
 		};
-		getWeather();
+		try {
+			getWeather();
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
 	}, [lat, lon]);
 
 	return <WeatherContext.Provider value={{ ...weather, updateWeather }}>{children}</WeatherContext.Provider>;

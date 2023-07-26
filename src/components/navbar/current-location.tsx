@@ -1,10 +1,13 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useContext, useState } from "react";
 import { LocationContext } from "../../context/LocationContext";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export default function CurrentLocation() {
 	const { updateLocation } = useContext(LocationContext);
 	const [error, setError] = useState<string | null>(null);
+
+	const isMobile = useIsMobile();
 
 	const getLocation = () => {
 		if ("geolocation" in navigator) {
@@ -25,10 +28,10 @@ export default function CurrentLocation() {
 	return (
 		<button
 			onClick={getLocation}
-			className="flex flex-row p-3 px-6 transition duration-300 rounded-full bg-brass-500 hover:bg-brass-400 hover:shadow-standard hover:shadow-brass-300/60"
+			className="flex flex-row p-3 transition duration-300 rounded-full lg:px-6 bg-brass-500 hover:bg-brass-400 hover:shadow-standard hover:shadow-brass-300/60"
 		>
-			<Icon icon="ph:map-pin-line-duotone" className="w-6 h-6 mr-2 text-white" />
-			<span className="text-white">Current location</span>
+			<Icon icon="ph:map-pin-line-duotone" className="w-6 h-6 text-white sm:mr-2" />
+			{!isMobile && <span className="text-white">Current location</span>}
 		</button>
 	);
 }

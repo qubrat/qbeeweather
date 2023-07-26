@@ -35,14 +35,14 @@ export default function CardNow() {
 	}, [lat, lon, icon]);
 
 	return (
-		<div className="flex flex-col items-start justify-center w-full p-8 text-white bg-green-900 rounded-3xl">
+		<div className="flex flex-col items-start justify-center p-8 text-white bg-green-900 rounded-3xl">
 			<p className="text-2xl ">Now</p>
 			<div className="flex flex-row items-center justify-between w-full my-4">
-				<span className="text-8xl ">
+				<span className="text-7xl md:text-6xl lg:text-8xl">
 					{temp ? temp : "-"}
-					<span className="align-top text-7xl">°c</span>
+					<span className="text-6xl align-top md:text-5xl lg:text-7xl">°c</span>
 				</span>
-				{loading ? <Spinner size="large" /> : <img src={weatherIcon} alt="weather icon" className="w-24 h-24" />}
+				{loading ? <Spinner size="large" /> : <img src={weatherIcon} alt="weather icon" className="w-20 md:w-16 lg:w-24" />}
 			</div>
 			<p>{desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "No data"}</p>
 			<hr className="w-full my-4 border border-green-500" />
