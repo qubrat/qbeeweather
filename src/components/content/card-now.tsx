@@ -33,10 +33,6 @@ export default function CardNow() {
 		}
 	}, [lat, lon, icon]);
 
-	useEffect(() => {
-		setLoading(true);
-	}, []);
-
 	return (
 		<div className="flex flex-col items-start justify-center p-8 text-white bg-gradient-to-br from-green-600 to-green-900 rounded-3xl">
 			<p className="text-2xl ">Now</p>
@@ -45,7 +41,7 @@ export default function CardNow() {
 					{temp ? temp : "-"}
 					<span className="text-6xl align-top md:text-5xl lg:text-7xl">°c</span>
 				</span>
-				{loading ? <Spinner size="large" /> : <img src={weatherIcon} alt="weather icon" className="w-20 md:w-16 lg:w-24" />}
+				{loading ? <Spinner size="large" /> : <img src={weatherIcon} alt="-" className="w-20 md:w-16 lg:w-24" />}
 			</div>
 			<p>{desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "No data"}</p>
 			<hr className="w-full my-4 border border-green-500" />

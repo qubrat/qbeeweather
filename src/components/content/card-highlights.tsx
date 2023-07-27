@@ -6,7 +6,6 @@ import { IAirQuality } from "../../interfaces/highlights";
 import { WeatherContext } from "../../context/WeatherContext";
 import Spinner from "./spinner";
 import Tooltip from "./tooltip";
-import { useIsTablet } from "../../hooks/useIsMobile";
 
 interface IAirQualityProps {
 	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -134,7 +133,7 @@ export default function Highlights() {
 				<Sun />
 				<SmallCard title="Humidity" icon="ph-drop-duotone" data={humidity} unit="%" />
 				<SmallCard title="Pressure" icon="ph-waves-duotone" data={pressure} unit="hPa" />
-				<SmallCard title="Visibility" icon="ph-eye-duotone" data={(visibility / 1000).toFixed(2)} unit="km" />
+				<SmallCard title="Visibility" icon="ph-eye-duotone" data={(visibility / 1000).toFixed(0)} unit="km" />
 				<SmallCard title="Feels Like" icon="ph-thermometer-hot-duotone" data={Math.round(feelsLike)} unit="°c" top />
 			</div>
 		</div>

@@ -1,11 +1,14 @@
+import Card5dForecast from "./card-5d-forecast";
 import Highlights from "./card-highlights";
 import CardNow from "./card-now";
 
 export default function Content() {
 	return (
 		<div className="flex flex-col gap-4 py-2 mt-20 md:gap-8 md:flex-row md:justify-between">
-			<div className="w-full md:w-4/12 xl:w-3/12">
+			<div className="flex flex-col w-full gap-4 md:w-6/12 xl:w-3/12">
 				<CardNow />
+				<p className="text-2xl font-semibold text-left text-green-800">5 Days Forecast</p>
+				<Card5dForecast />
 			</div>
 			<div className="w-full md:w-8/12 xl:w-9/12">
 				<Highlights />
