@@ -14,7 +14,7 @@ function App() {
 		<LocationProvider>
 			<WeatherProvider setLoading={setLoading}>
 				<Navbar />
-				{loading ? <Spinner size="large" color="green-900"></Spinner> : <Content />}
+				{loading ? <Spinner size="large" color="green-600"></Spinner> : <Content />}
 			</WeatherProvider>
 		</LocationProvider>
 	);

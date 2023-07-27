@@ -1,9 +1,10 @@
 interface ISpinnerProps {
 	size: "standard" | "small" | "large";
 	color?: string;
+	styles?: string;
 }
 
-export default function Spinner({ size, color }: ISpinnerProps) {
+export default function Spinner({ size, color, styles }: ISpinnerProps) {
 	const getSize = () => {
 		switch (size) {
 			case "small":
@@ -21,7 +22,7 @@ export default function Spinner({ size, color }: ISpinnerProps) {
 		<div
 			className={`inline-block ${getSize()} animate-spin rounded-full border-solid border-${
 				color ? color : "current"
-			} border-r-transparent border-l-transparent align-[-0.125em] motion-reduce:animate-[spin_2s_linear_infinite]`}
+			} border-r-transparent border-l-transparent align-[-0.125em] motion-reduce:animate-[spin_2s_linear_infinite] ${styles}`}
 			role="status"
 		>
 			<span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"></span>

@@ -35,7 +35,7 @@ export default function CardNow() {
 	}, [lat, lon, icon]);
 
 	return (
-		<div className="flex flex-col items-start justify-center p-8 text-white bg-green-900 rounded-3xl">
+		<div className="flex flex-col items-start justify-center p-8 text-white bg-gradient-to-br from-green-600 to-green-900 rounded-3xl">
 			<p className="text-2xl ">Now</p>
 			<div className="flex flex-row items-center justify-between w-full my-4">
 				<span className="text-7xl md:text-6xl lg:text-8xl">
@@ -47,11 +47,12 @@ export default function CardNow() {
 			<p>{desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "No data"}</p>
 			<hr className="w-full my-4 border border-green-500" />
 			<div className="align-bottom">
-				<Icon icon="ph:calendar-blank-duotone" className="inline w-6 h-6" /> <span className="inline text-green-500">{date}</span>
+				<Icon icon="ph:calendar-blank-duotone" className="inline w-6 h-6 mr-1 text-green-400" />
+				<span className="inline text-green-400">{date}</span>
 			</div>
 			<div className="align-bottom">
-				<Icon icon="ph:map-pin-duotone" className="inline w-6 h-6" />{" "}
-				<span className="inline text-green-500 align-bottom ">
+				<Icon icon="ph:map-pin-duotone" className="inline w-6 h-6 mr-1 text-green-400" />
+				<span className="inline text-green-400 align-bottom ">
 					{name}, {country}
 				</span>
 			</div>

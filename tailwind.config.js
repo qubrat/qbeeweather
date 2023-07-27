@@ -11,15 +11,17 @@ export default {
 			current: "currentColor",
 			brass: {
 				300: "#DDBF7A",
-				400: "#E3B039",
-				500: "#c99c33",
+				400: "#d69f54",
+				500: "#D29542",
 			},
 			green: {
 				100: "#ecfdf5",
-				500: "#8AA8A6",
+				400: "#d8f8ed",
+				500: "#8cbcac",
+				600: "#649d8c",
 				700: "#487e6f",
-				800: "#4B6966",
-				900: "#425c5a",
+				800: "#3a675b",
+				900: "#31544b",
 			},
 			airquality: {
 				good: "#82c07b",
