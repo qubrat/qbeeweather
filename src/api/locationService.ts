@@ -18,7 +18,6 @@ export async function getLocationsListFromCityName(cityName: string) {
 		return data.map((location: any) => {
 			return { lat: location.lat, lon: location.lon, name: location.name, country: location.country, state: location.state };
 		});
-		// return { lat: data[0].lat, lon: data[0].lon };
 	} catch (err) {
 		console.log(err);
 		return {};

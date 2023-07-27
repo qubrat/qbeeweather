@@ -73,20 +73,18 @@ const AirQuality = ({ setLoading }: IAirQualityProps) => {
 const Sun = () => {
 	const { sunrise, sunset } = useContext(WeatherContext);
 
-	const isTablet = useIsTablet();
-
 	return (
 		<div className="p-4 text-left bg-green-100 md:col-span-2 rounded-3xl">
 			<span className="text-green-800">Sunrise & Sunset</span>
 			<div className="flex items-center py-6">
-				<div className="flex items-center flex-1 gap-8">
+				<div className="flex flex-col items-center justify-start flex-1 gap-2 lg:gap-8 lg:flex-row">
 					<Icon icon="ph:sun-horizon-duotone" className="w-12 h-12 text-green-800" />
 					<div className="flex flex-col items-center justify-start">
 						<p className="text-green-800">Sunrise</p>
 						<p className="text-3xl font-medium text-green-800">{sunrise ? sunrise : "-"}</p>
 					</div>
 				</div>
-				<div className="flex items-center justify-start flex-1 gap-8">
+				<div className="flex flex-col items-center justify-start flex-1 gap-2 lg:gap-8 lg:flex-row">
 					<Icon icon="ph:moon-stars-duotone" className="w-12 h-12 text-green-800" />
 					<div className="flex flex-col items-center justify-center">
 						<p className="text-green-800">Sunset</p>

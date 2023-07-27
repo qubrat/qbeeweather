@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import weather from "../../assets/weather_icons/04d.png";
 import { useContext, useEffect, useState } from "react";
 import { LocationContext } from "../../context/LocationContext";
 import { getCityNameFromLocation } from "../../api/locationService";
@@ -9,7 +8,7 @@ import Spinner from "./spinner";
 export default function CardNow() {
 	const { lat, lon, name, country, updateCity } = useContext(LocationContext);
 	const { temp, desc, icon } = useContext(WeatherContext);
-	const [weatherIcon, setWeatherIcon] = useState<string>(weather);
+	const [weatherIcon, setWeatherIcon] = useState<string | undefined>();
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const date = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
@@ -33,6 +32,10 @@ export default function CardNow() {
 			setLoading(false);
 		}
 	}, [lat, lon, icon]);
+
+	useEffect(() => {
+		setLoading(true);
+	}, []);
 
 	return (
 		<div className="flex flex-col items-start justify-center p-8 text-white bg-gradient-to-br from-green-600 to-green-900 rounded-3xl">

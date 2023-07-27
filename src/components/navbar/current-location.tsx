@@ -30,7 +30,7 @@ export default function CurrentLocation() {
 			onClick={getLocation}
 			className="flex flex-row p-3 transition duration-300 rounded-full lg:px-6 bg-brass-500 hover:bg-brass-400 hover:shadow-standard hover:shadow-brass-300/60"
 		>
-			<Icon icon="ph:map-pin-line-duotone" className="w-6 h-6 text-white sm:mr-2" />
+			<Icon icon="ph:crosshair-simple-duotone" className="w-6 h-6 text-white sm:mr-2" />
 			{!isMobile && <span className="text-white">Current&nbsp;location</span>}
 		</button>
 	);

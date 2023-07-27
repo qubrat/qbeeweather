@@ -49,7 +49,6 @@ export default function Search() {
 				setLoading(true);
 				const response = await getLocationsListFromCityName(inputValue);
 				setLocations(response);
-				console.log(inputValue);
 			} catch (error) {
 				console.log(error);
 			} finally {
