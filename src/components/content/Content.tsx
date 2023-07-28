@@ -10,8 +10,9 @@ export default function Content() {
 				<p className="text-2xl font-semibold text-left text-green-800">5 Days Forecast</p>
 				<Card5dForecast />
 			</div>
-			<div className="w-full md:w-8/12 xl:w-9/12">
+			<div className="flex flex-col w-full gap-4 md:w-8/12 xl:w-9/12 md:h-[90vh] md:overflow-y-auto md:no-scrollbar">
 				<Highlights />
+				<p className="text-2xl font-semibold text-left text-green-800">Today at</p>
 			</div>
 		</div>
 	);

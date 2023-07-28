@@ -29,7 +29,7 @@ function ForecastItem({ temp, icon, date, weekday }: IForecastProps) {
 	return (
 		<div className="flex items-center justify-between w-full">
 			<div className="flex items-center w-1/3 gap-2 mr-[8%]">
-				<img src={weatherIcon} alt=":(" className="w-6 md:w-10" />
+				<img src={weatherIcon} alt=":(" className="w-10 md:w-8 lg:w-10" />
 				<span className="text-2xl lg:text-3xl">{temp}°</span>
 			</div>
 			<div className="w-1/4 text-sm text-green-700 lg:text-base">{date}</div>

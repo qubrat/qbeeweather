@@ -39,29 +39,29 @@ const AirQuality = ({ setLoading }: IAirQualityProps) => {
 				</Tooltip>
 			</span>
 			<div className="flex items-center py-6">
-				<Icon icon="ph:wind-duotone" className="inline w-12 h-12 mr-4 text-green-800" />
+				<Icon icon="ph:wind-duotone" className="inline mr-4 text-green-800 w-14 h-14 md:w-12 md:h-12 lg:h-14 lg:w-14" />
 				<div className="grid flex-auto grid-cols-2 gap-2 xl:grid-cols-4">
 					<div>
 						<p className="text-green-800">PM2.5</p>
-						<p className="text-3xl font-medium text-green-800">{airQuality ? airQuality.pm2_5 : "-"}</p>
+						<p className="text-4xl font-medium text-green-800">{airQuality ? airQuality.pm2_5 : "-"}</p>
 					</div>
 					<div>
 						<p className="text-green-800">
 							SO<span className="text-sm">2</span>
 						</p>
-						<p className="text-3xl font-medium text-green-800">{airQuality ? airQuality.so2 : "-"}</p>
+						<p className="text-4xl font-medium text-green-800">{airQuality ? airQuality.so2 : "-"}</p>
 					</div>
 					<div>
 						<p className="text-green-800">
 							NO<span className="text-sm">2</span>
 						</p>
-						<p className="text-3xl font-medium text-green-800">{airQuality ? airQuality.no2 : "-"}</p>
+						<p className="text-4xl font-medium text-green-800">{airQuality ? airQuality.no2 : "-"}</p>
 					</div>
 					<div>
 						<p className="text-green-800">
 							O<span className="text-sm">3</span>
 						</p>
-						<p className="text-3xl font-medium text-green-800">{airQuality ? airQuality.o3 : "-"}</p>
+						<p className="text-4xl font-medium text-green-800">{airQuality ? airQuality.o3 : "-"}</p>
 					</div>
 				</div>
 			</div>
@@ -77,17 +77,17 @@ const Sun = () => {
 			<span className="text-green-800">Sunrise & Sunset</span>
 			<div className="flex items-center py-6">
 				<div className="flex flex-col items-center justify-start flex-1 gap-2 lg:gap-8 lg:flex-row">
-					<Icon icon="ph:sun-horizon-duotone" className="w-12 h-12 text-green-800" />
+					<Icon icon="ph:sun-horizon-duotone" className="text-green-800 w-14 h-14 md:w-12 md:h-12 lg:h-14 lg:w-14" />
 					<div className="flex flex-col items-center justify-start">
 						<p className="text-green-800">Sunrise</p>
-						<p className="text-3xl font-medium text-green-800">{sunrise ? sunrise : "-"}</p>
+						<p className="text-4xl font-medium text-green-800">{sunrise ? sunrise : "-"}</p>
 					</div>
 				</div>
 				<div className="flex flex-col items-center justify-start flex-1 gap-2 lg:gap-8 lg:flex-row">
-					<Icon icon="ph:moon-stars-duotone" className="w-12 h-12 text-green-800" />
+					<Icon icon="ph:moon-stars-duotone" className="text-green-800 w-14 h-14 md:w-12 md:h-12 lg:h-14 lg:w-14" />
 					<div className="flex flex-col items-center justify-center">
 						<p className="text-green-800">Sunset</p>
-						<p className="text-3xl font-medium text-green-800">{sunset ? sunset : "-"}</p>
+						<p className="text-4xl font-medium text-green-800">{sunset ? sunset : "-"}</p>
 					</div>
 				</div>
 			</div>
@@ -108,8 +108,8 @@ const SmallCard = ({ title, icon, data, unit, top }: ISmallCardProps) => {
 		<div className="p-4 text-left bg-green-100 rounded-3xl">
 			<span className="text-green-800">{title}</span>
 			<div className="flex items-center justify-between gap-4 my-2">
-				<Icon icon={icon} className="w-10 h-10 text-green-800 md:w-12 md:h-12" />
-				<span className="text-3xl font-medium text-green-800">
+				<Icon icon={icon} className="w-12 h-12 text-green-800 md:w-10 md:h-10 lg:h-12 lg:w-12" />
+				<span className="text-3xl font-medium text-green-800 lg:text-4xl">
 					{data ? data : "-"}
 					<span className={`text-2xl ${top ? "align-top" : ""}`}>{unit}</span>
 				</span>
