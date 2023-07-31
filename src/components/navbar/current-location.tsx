@@ -1,11 +1,10 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { LocationContext } from "../../context/LocationContext";
 import { useIsMobile } from "../../hooks/useIsMobile";
 
 export default function CurrentLocation() {
 	const { updateLocation } = useContext(LocationContext);
-	const [error, setError] = useState<string | null>(null);
 
 	const isMobile = useIsMobile();
 
@@ -14,14 +13,13 @@ export default function CurrentLocation() {
 			navigator.geolocation.getCurrentPosition(
 				(position) => {
 					updateLocation(position.coords.latitude, position.coords.longitude);
-					setError(null);
 				},
 				(error) => {
-					setError(`Error getting location: ${error.message}`);
+					console.log(`Error getting location: ${error.message}`);
 				}
 			);
 		} else {
-			setError("Geolocation is not supported in this browser.");
+			console.log("Geolocation is not supported in this browser.");
 		}
 	};
 
