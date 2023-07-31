@@ -52,7 +52,7 @@ export default function Card5dForecast() {
 	}, [lat, lon]);
 
 	return (
-		<div className="flex flex-col items-start justify-center w-full gap-4 p-8 text-green-800 bg-white rounded-3xl">
+		<div className="flex flex-col items-start justify-center w-full gap-6 p-8 text-green-800 bg-white rounded-3xl">
 			{forecast.map((item, index) => (
 				<ForecastItem key={index} temp={item.temp} icon={item.icon} date={item.date} weekday={item.weekday} />
 			))}

@@ -32,6 +32,7 @@ export default {
 			},
 			white: colors.white,
 			black: colors.black,
+			blue: "#2196f3",
 		},
 		extend: {
 			boxShadow: {

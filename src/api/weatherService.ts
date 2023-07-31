@@ -56,3 +56,24 @@ export async function get5dForecast(lat: number, lon: number) {
 		return [];
 	}
 }
+
+export async function getTodayForecast(lat: number, lon: number, size: number = 8) {
+	try {
+		const response = await fetch(`${SETTINGS.API_URL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${SETTINGS.API_KEY}&units=metric`);
+		const data = await response.json();
+		return data.list.slice(0, size).map((item: any) => {
+			return {
+				temp: Math.round(item.main.temp),
+				wind: {
+					speed: item.wind.speed.toFixed(1),
+					deg: item.wind.deg,
+				},
+				icon: item.weather[0].icon,
+				time: `${getHours(item.dt)}:00`,
+			};
+		});
+	} catch (err) {
+		console.log(err);
+		return [];
+	}
+}
