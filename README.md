@@ -11,16 +11,33 @@ This is a simple weather app that uses the OpenWeatherMap API to display the cur
 -   View the current weather conditions for the user's current location
 -   Responsive design
 
-### Demo
-
-https://qubrat.github.io/qbeeweather/
-
 ### Built With Stack
 
 -   [React](https://reactjs.org/)
 -   [TypeScript](https://www.typescriptlang.org/)
 -   [Tailwind CSS](https://tailwindcss.com/)
 -   [OpenWeatherMap API](https://openweathermap.org/api)
+
+### Demo
+
+https://qubrat.github.io/qbeeweather/
+
+### Disclaimer
+
+Design of the app is heavily inspired by [this](https://www.youtube.com/watch?v=QMwyNnjAils) video by [codewithsadee](https://www.youtube.com/@codewithsadee). Kudos for the great work!
+
+### Screenshots
+
+<div style="display: flex;">
+      <img src="https://github.com/qubrat/qbeeweather/blob/master/screenshots/dt.png" height="300" style="margin-right: 20px;">
+      <img src="https://github.com/qubrat/qbeeweather/blob/master/screenshots/t.png" height="300">
+</div>
+
+<div style="display: flex;">
+   <img src="https://github.com/qubrat/qbeeweather/blob/master/screenshots/m1.png" height="400" style="margin-right: 20px;">
+   <img src="https://github.com/qubrat/qbeeweather/blob/master/screenshots/m2.png" height="400" style="margin-right: 20px;">
+   <img src="https://github.com/qubrat/qbeeweather/blob/master/screenshots/m3.png" height="400">
+</div>
 
 ### Installation on local machine
 
