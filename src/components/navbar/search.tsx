@@ -23,7 +23,9 @@ export default function Search() {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [locations, setLocations] = useState<ILocation[]>([]);
 	const [inputValue, setInputValue] = useState<string>("");
-	const [searchShown, setSearchShown] = useState<boolean>(false);
+	const [searchResultsShown, setSearchResultsShown] = useState<boolean>(false);
+
+	const [mobileSearchShown, setMobileSearchShown] = useState<boolean>(false);
 
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -34,10 +36,11 @@ export default function Search() {
 	const onLocationClick = (location: ILocation) => {
 		updateLocation(location.lat, location.lon);
 		setLocations([]);
+		setMobileSearchShown(false);
 	};
 
 	const bottomRadius = () => {
-		if (searchShown) {
+		if (searchResultsShown) {
 			return "rounded-tl-3xl rounded-tr-3xl";
 		} else {
 			return "rounded-full";
@@ -45,10 +48,10 @@ export default function Search() {
 	};
 
 	useEffect(() => {
-		if (locations.length > 0 && isComponentVisible) {
-			setSearchShown(true);
+		if (locations.length > 0 && isComponentVisible && !isTablet) {
+			setSearchResultsShown(true);
 		} else {
-			setSearchShown(false);
+			setSearchResultsShown(false);
 		}
 	}, [locations, isComponentVisible]);
 
@@ -74,9 +77,57 @@ export default function Search() {
 
 	return (
 		<div className="relative lg:w-1/4" ref={ref}>
-			<div className="p-3 bg-white rounded-full lg:bg-transparent lg:pointer-events-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:items-center">
-				<Icon icon="ph:magnifying-glass-duotone" className="w-6 h-6 text-green-800" />
+			<div
+				className={`fixed bottom-0 left-0 w-full h-full bg-green-100 ${
+					mobileSearchShown ? "translate-y-0" : "-translate-y-full"
+				} transition-transform duration-300 ease-in-out`}
+			>
+				<div className="flex items-center justify-between py-2 bg-white">
+					<button type="button" className="p-4" onClick={() => setMobileSearchShown(false)}>
+						<Icon icon="ph:arrow-bend-up-left-bold" className="w-6 h-6 text-green-800 "></Icon>
+					</button>
+					<input
+						type="search"
+						placeholder="Search for a city..."
+						onChange={handleChange}
+						className="w-full p-4 pl-0 font-semibold text-green-800 bg-white focus:outline-none placeholder:text-green-600"
+					/>
+					{loading && (
+						<div className="flex items-center p-4 pointer-events-none">
+							<Spinner size="small" color="green-500" />
+						</div>
+					)}
+				</div>
+				{locations.length > 0 && (
+					<div className="w-full bg-green-100 cursor-pointer top-12">
+						{locations.map((location, index) => {
+							return (
+								<div
+									key={index}
+									onClick={() => onLocationClick(location)}
+									className="flex items-center justify-start w-full p-4 transition-colors duration-200 first:border-t first:border-t-green-500 hover:bg-white"
+								>
+									<Icon icon="ph:map-pin-duotone" className="w-6 h-6 mr-4 text-green-600" />
+									<div className="w-full text-left">
+										<span className="font-semibold text-green-600">{location.name}</span>
+										<div className="text-sm text-green-500">
+											<span>{location.state}</span> <span>{location.country}</span>
+										</div>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				)}
 			</div>
+			<button
+				type="button"
+				className="p-3 bg-white rounded-full lg:bg-transparent lg:pointer-events-none lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:items-center"
+				onClick={() => setMobileSearchShown(true)}
+				disabled={!isTablet}
+			>
+				<Icon icon="ph:magnifying-glass-duotone" className="w-6 h-6 text-green-800" />
+			</button>
 			{isTablet ? (
 				<></>
 			) : (
@@ -88,12 +139,12 @@ export default function Search() {
 				/>
 			)}
 			{!isTablet && loading && (
-				<div className="absolute inset-y-0 right-0 flex items-center p-3 pl-3 pointer-events-none">
+				<div className="absolute inset-y-0 right-0 flex items-center p-3 pointer-events-none">
 					<Spinner size="small" color="green-500" />
 				</div>
 			)}
 
-			{searchShown && locations.length > 0 && (
+			{searchResultsShown && locations.length > 0 && (
 				<div className="absolute z-10 w-full bg-white cursor-pointer top-12 rounded-bl-3xl rounded-br-3xl shadow-standard shadow-green-500/60">
 					{locations.map((location, index) => {
 						return (
